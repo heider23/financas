@@ -8,7 +8,8 @@ package br.com.financas;
  * <br>
  * <b>Company:</b> Financas
  * <br> 
- * @author Heider Taguatinga Farias
+ * @author Heider Taguatinga Farias.
+ *
  * @version $Revision: $,$Date: 2009/16/03 10:21:00 $
  */
 public abstract class Financas {
