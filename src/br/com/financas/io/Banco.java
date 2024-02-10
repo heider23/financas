@@ -1,5 +1,11 @@
 package br.com.financas.io;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.Properties;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+
 
 public class Banco {
 
@@ -16,30 +27,45 @@ public class Banco {
 	private boolean conexaoAtiva = false;
 	private String sqlState = new String();
 
+	private Properties properties = loadProperties();
 	/*
 	 * Dados do Banco
 	 */
-	private String nomeBanco = new String("financas");
-	private String nomeUsuarioSistema = "financas";
-	private String senhaUsuarioSistema = "financas";
+	private String nomeBanco = properties.getProperty("database.name");
+	private String nomeUsuarioSistema = properties.getProperty("database.user");
+	private String senhaUsuarioSistema = properties.getProperty("database.password");
 
 	/*
-	 * Configuração para acesso com o MySql
+	 * Configuraï¿½ï¿½o para acesso com o MySql
 	 */
-	private String strDriver = "com.mysql.jdbc.Driver";
-	private String strConexao = "jdbc:mysql://localhost:3306/";
+	private String strDriver = properties.getProperty("database.driver");
+	private String strConexao = properties.getProperty("database.url");
 
-	/*
-	 * Constructor padrao 
-	 */
-	public Banco() {
+	private Properties loadProperties() {
+		Properties properties = new Properties();
+		try {
+						
+			InputStream inputStream = new FileInputStream(this.getPasta()+"database.properties");
+			properties.load(inputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return properties;
+	}
+	
+	private String getPasta() throws Exception {
+		URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
+		File file = new File(url.toURI());
+		String pasta  = file.getAbsolutePath();
+		pasta = pasta.substring(0, pasta.length()-8)+"\\";
+		return pasta;
 	}
 
-	public Banco(String nomeBanco) {
-		if (nomeBanco != null) {
-			this.nomeBanco = nomeBanco.trim().toUpperCase();
-		}
-		return;
+	/*
+	 * Constructor padrao
+	 */
+	public Banco() {
+
 	}
 
 	public String obterSistema() {
@@ -53,9 +79,8 @@ public class Banco {
 	private boolean obterConexao() throws Exception {
 		if (!this.getConexaoAtiva()) {
 			try {
-				Class.forName(strDriver).newInstance();
-				oConn = DriverManager.getConnection(
-						strConexao + this.nomeBanco, this.nomeUsuarioSistema,
+				Class.forName(strDriver);
+				oConn = DriverManager.getConnection(strConexao + this.nomeBanco, this.nomeUsuarioSistema,
 						this.senhaUsuarioSistema);
 				this.setConexaoAtiva(true);
 			} catch (SQLException e) {
@@ -76,7 +101,7 @@ public class Banco {
 	}
 
 	public final boolean desconectar() throws Exception {
-	
+
 		if (this.getTransacao()) {
 			fecharTransacao();
 		}
@@ -84,21 +109,21 @@ public class Banco {
 			this.oConn.close();
 			this.setConexaoAtiva(false);
 		}
-	
+
 		return true;
-	
+
 	}
 
 	public final void abrirTransacao() throws Exception {
-	
+
 		try {
-	
+
 			oConn.setAutoCommit(false);
-	
+
 		} catch (SQLException e) {
 			throw new Exception(e.getMessage());
 		}
-	
+
 	}
 
 	public final void fecharTransacao() throws Exception {
@@ -111,9 +136,9 @@ public class Banco {
 	}
 
 	public final void cancelarTransacao() throws Exception {
-	
+
 		this.sqlState = "";
-	
+
 		try {
 			oConn.rollback();
 			oConn.setAutoCommit(true);
@@ -130,8 +155,7 @@ public class Banco {
 		this.transacao = transacao;
 	}
 
-	public final PreparedStatement criarPS(String instrucaoSQL)
-			throws Exception {
+	public final PreparedStatement criarPS(String instrucaoSQL) throws Exception {
 
 		this.sqlState = "";
 
@@ -144,8 +168,7 @@ public class Banco {
 
 	}
 
-	public final CallableStatement criarCS(String StoredProcedure)
-			throws Exception {
+	public final CallableStatement criarCS(String StoredProcedure) throws Exception {
 
 		this.sqlState = "";
 
@@ -172,13 +195,11 @@ public class Banco {
 		}
 	}
 
-	public final ResultSet consultarSQL(PreparedStatement oPStmt)
-			throws Exception {
+	public final ResultSet consultarSQL(PreparedStatement oPStmt) throws Exception {
 		return this.consultarSQL(oPStmt, true);
 	}
 
-	public final ResultSet consultarSQL(PreparedStatement oPStmt,
-			boolean fecharPstmt) throws Exception {
+	public final ResultSet consultarSQL(PreparedStatement oPStmt, boolean fecharPstmt) throws Exception {
 		this.sqlState = "";
 		try {
 			ResultSet oRS = oPStmt.executeQuery();
@@ -209,8 +230,7 @@ public class Banco {
 		return this.executarSQL(oPStmt, true);
 	}
 
-	public final int executarSQL(PreparedStatement oPStmt, boolean fecharPstmt)
-			throws Exception {
+	public final int executarSQL(PreparedStatement oPStmt, boolean fecharPstmt) throws Exception {
 
 		this.sqlState = "";
 

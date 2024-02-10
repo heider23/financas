@@ -64,6 +64,7 @@ public class Login implements Controle {
 				}
 			} catch (Exception e) {
 				this.setMsg(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		request.setAttribute("Login", this);

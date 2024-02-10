@@ -40,6 +40,9 @@ public class Seguranca {
 				try {
 					NAcesso oNAcesso = new NAcesso();
 					oEAcesso = oNAcesso.consultar(oEUsuario.getId(),recurso);
+					if (oEAcesso == null) {
+						throw new Exception("Usuário não tem acesso a " + recurso);
+					}
 				} catch (Exception e) {
 					this.erroSeguranca(e.getMessage());
 				}
