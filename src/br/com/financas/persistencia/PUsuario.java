@@ -43,6 +43,7 @@ public class PUsuario extends Persistencia implements IUsuario {
 					eUsuario = new EUsuario();
 					eUsuario.setId(new Integer(objResultSet.getInt("id_usuario")));
 					eUsuario.setNome(objResultSet.getString("nome"));
+					eUsuario.setApelido(objResultSet.getString("apelido"));
 					eUsuario.setSenha(objResultSet.getString("senha"));
 					eUsuario.setStatus(objResultSet.getString("status").charAt(0));
 				}
