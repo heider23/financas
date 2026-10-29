@@ -118,7 +118,8 @@ public class PContato extends Persistencia implements IContato {
 					eContato.setCep(oRSet.getString("CEP"));
 					eContato.setTelefoneFixo(oRSet.getString("TELEFONE_FIXO"));
 					eContato.setTelefoneCelular(oRSet.getString("TELEFONE_CELULAR"));
-					eContato.setEmail(oRSet.getString("EMAIL"));	
+					eContato.setEmail(oRSet.getString("EMAIL"));
+					eContato.setIdUsuario(oRSet.getInt("ID_USUARIO"));
 				} else {
 					return null;
 				}
@@ -151,7 +152,7 @@ public class PContato extends Persistencia implements IContato {
 		if (contato != null) {
 			if (oBanco.getConexaoAtiva()) {
 				String instrucaoSQL = new String();
-				instrucaoSQL = "INSERT INTO contato (NOME,DATA_NASCIMENTO,SEXO,ENDERECO,COMPLEMENTO,BAIRRO,CEP,TELEFONE_FIXO,TELEFONE_CELULAR,EMAIL) VALUES (?,?,?,?,?,?,?,?,?,?)";				
+				instrucaoSQL = "INSERT INTO contato (NOME,DATA_NASCIMENTO,SEXO,ENDERECO,COMPLEMENTO,BAIRRO,CEP,TELEFONE_FIXO,TELEFONE_CELULAR,EMAIL,ID_USUARIO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";				
 				PreparedStatement pstm = oBanco.criarPS(instrucaoSQL);
 				if (pstm != null) {
 					Data oData = new Data();
@@ -204,6 +205,11 @@ public class PContato extends Persistencia implements IContato {
 						pstm.setString(10, contato.getEmail()); 
 					} else {
 						pstm.setNull(10, java.sql.Types.VARCHAR);
+					}
+					if (contato.getIdUsuario() != null) {
+						pstm.setInt(11, contato.getIdUsuario()); 
+					} else {
+						pstm.setNull(11, java.sql.Types.INTEGER);
 					}
 					registros = oBanco.executarSQL(pstm);
 				}

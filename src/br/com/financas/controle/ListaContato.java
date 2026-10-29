@@ -122,10 +122,10 @@ public class ListaContato implements Controle {
 			 * Setar permissoes dos botoes. 
 			 */
 			EAcesso eAcesso = (EAcesso) request.getSession().getAttribute("acesso");
-			this.setPodeCON(eAcesso.getConsulta() == '1');
-			this.setPodeALT(eAcesso.getAltera() == '1');
-			this.setPodeINC(eAcesso.getInclui() == '1');
-			this.setPodeEXC(eAcesso.getExclui() == '1');
+			this.setPodeCON(eAcesso.getConsulta() == 'S');
+			this.setPodeALT(eAcesso.getAltera() == 'S');
+			this.setPodeINC(eAcesso.getInclui() == 'S');
+			this.setPodeEXC(eAcesso.getExclui() == 'S');
 			return true;
 		} else {
 			return false;

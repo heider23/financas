@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import br.com.financas.entidade.EAcesso;
+import br.com.financas.entidade.EAplicacao;
 import br.com.financas.entidade.EUsuario;
 import br.com.financas.io.Banco;
 import br.com.financas.negocio.imp.IAcesso;
@@ -18,7 +19,11 @@ public class PAcesso extends Persistencia implements IAcesso {
 	}
 	
 	public EAcesso consultar(Integer usuario, String recurso) throws Exception {
+		
 		EAcesso eAcesso = null;
+		EAplicacao eAplicacao = null;
+		EUsuario eUsuario = null;
+		
 		if (usuario != null && recurso != null) {
 			if (oBanco.getConexaoAtiva()) {
 				String instrucaoSQL = new String();
@@ -32,8 +37,8 @@ public class PAcesso extends Persistencia implements IAcesso {
 				}
 				if (objResultSet != null && objResultSet.next()) {
 					eAcesso = new EAcesso();
-					eAcesso.setAplicacao(null);
-					eAcesso.setUsuario(null);
+					eAcesso.setIdUsuario(usuario);
+					eAcesso.setNomeRecurso(recurso); 
 					eAcesso.setConsulta(objResultSet.getString("consulta").charAt(0));
 					eAcesso.setAltera(objResultSet.getString("altera").charAt(0));
 					eAcesso.setInclui(objResultSet.getString("inclui").charAt(0));

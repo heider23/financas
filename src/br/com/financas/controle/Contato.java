@@ -19,6 +19,7 @@ public class Contato implements Controle {
 	private String acao;
 	private String msg;
 	private String idContato;
+	private String idUsuario;
 	private String nome;
 	private String dataNascimento;
 	private String sexo;
@@ -41,6 +42,7 @@ public class Contato implements Controle {
 		this.setAcao("");
 		this.setMsg("");
 		this.setIdContato("");
+		this.setIdUsuario("");
 		this.setNome("");
 		this.setDataNascimento("");
 		this.setSexo("M");
@@ -86,6 +88,14 @@ public class Contato implements Controle {
 		this.idContato = idContato;
 	}
 
+	public String getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(String idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -217,10 +227,12 @@ public class Contato implements Controle {
 			 * Setar permissoes dos botoes. 
 			 */
 			EAcesso eAcesso = (EAcesso) request.getSession().getAttribute("acesso");
-			this.setPodeCON(eAcesso.getConsulta() == '1');
-			this.setPodeALT(eAcesso.getAltera() == '1');
-			this.setPodeINC(eAcesso.getInclui() == '1');
-			this.setPodeEXC(eAcesso.getExclui() == '1');
+			this.setIdUsuario(String.valueOf(eAcesso.getIdUsuario()));
+			this.setPodeCON(eAcesso.getConsulta() == 'S');
+			this.setPodeALT(eAcesso.getAltera() == 'S');
+			this.setPodeINC(eAcesso.getInclui() == 'S');
+			this.setPodeEXC(eAcesso.getExclui() == 'S');
+			
 			return true;
 		} else {
 			return false;
@@ -249,6 +261,7 @@ public class Contato implements Controle {
 			 * passados como parametro e que ser�o usados dentro da classe. 
 			 */
 			this.setIdContato(request.getParameter("idContato")!=null ? request.getParameter("idContato"):"");
+			this.setIdUsuario(this.getIdUsuario());
 			this.setNome(request.getParameter("nome")!=null ? request.getParameter("nome"):"");
 			this.setDataNascimento(request.getParameter("dataNascimento")!=null ? request.getParameter("dataNascimento"):"");
 			this.setSexo(request.getParameter("sexo")!=null ? request.getParameter("sexo"):"");
@@ -312,6 +325,7 @@ public class Contato implements Controle {
 			eContato = nContato.consultar(eContato);
 			if (eContato != null) {
 				this.setIdContato(eContato.getIdContato().toString());
+				this.setIdUsuario(eContato.getIdUsuario().toString());
 				this.setNome(eContato.getNome());
 				this.setDataNascimento(oData.formatar(eContato.getDataNascimento(),"dd/MM/yyyy"));
 				this.setSexo(String.valueOf(eContato.getSexo()));
@@ -336,6 +350,7 @@ public class Contato implements Controle {
 			EContato eContato = new EContato();
 			NContato nContato = new NContato();
 			eContato.setIdContato(Integer.parseInt(this.getIdContato()));
+			eContato.setIdUsuario(Integer.valueOf(this.getIdUsuario()));
 			eContato.setNome(this.getNome());
 			eContato.setDataNascimento(oData.converter(this.getDataNascimento(), "dd/MM/yyyy"));
 			eContato.setSexo(this.getSexo().charAt(0));
@@ -358,6 +373,7 @@ public class Contato implements Controle {
 			EContato eContato = new EContato();
 			NContato nContato = new NContato();
 			eContato.setIdContato(null);
+			eContato.setIdUsuario(Integer.valueOf(this.getIdUsuario()));
 			eContato.setNome(this.getNome());
 			eContato.setDataNascimento(oData.converter(this.getDataNascimento(), "dd/MM/yyyy"));
 			eContato.setSexo(this.getSexo().charAt(0));

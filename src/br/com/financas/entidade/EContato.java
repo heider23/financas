@@ -5,6 +5,7 @@ import java.util.Date;
 public class EContato {
 	
 	private Integer idContato;
+	private Integer idUsuario;
 	private String nome;
 	private Date dataNascimento;
 	private char sexo;
@@ -21,6 +22,12 @@ public class EContato {
 	}
 	public void setIdContato(Integer idContato) {
 		this.idContato = idContato;
+	}
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	public String getNome() {
 		return nome;

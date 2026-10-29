@@ -9,8 +9,8 @@ package br.com.financas.entidade;
  */
 public class EAcesso {
 
-	private EUsuario usuario;
-	private EAplicacao aplicacao;	
+	private Integer idUsuario;
+	private String nomeRecurso;	
 	private char consulta;
 	private char altera;
 	private char inclui;
@@ -19,26 +19,26 @@ public class EAcesso {
 	/**
 	 * @return the usuario
 	 */
-	public EUsuario getUsuario() {
-		return usuario;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 	/**
-	 * @param usuario the usuario to set
+	 * @param idUsuario the idUsuario to set
 	 */
-	public void setUsuario(EUsuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	/**
-	 * @return the aplicacao
+	 * @return the nomeRecurso
 	 */
-	public EAplicacao getAplicacao() {
-		return aplicacao;
+	public String getNomeRecurso() {
+		return nomeRecurso;
 	}
 	/**
-	 * @param aplicacao the aplicacao to set
+	 * @param nomeRecurso the nomeRecurso to set
 	 */
-	public void setAplicacao(EAplicacao aplicacao) {
-		this.aplicacao = aplicacao;
+	public void setNomeRecurso(String nomeRecurso) {
+		this.nomeRecurso = nomeRecurso;
 	}
 	/**
 	 * @return the consulta
