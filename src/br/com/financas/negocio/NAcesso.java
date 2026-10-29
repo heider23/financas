@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.financas.entidade.EAcesso;
 import br.com.financas.entidade.EUsuario;
+import br.com.financas.negocio.imp.IAcesso;
 import br.com.financas.persistencia.PAcesso;
 
 public class NAcesso extends Negocio implements IAcesso {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import br.com.financas.entidade.ECompromisso;
 import br.com.financas.entidade.EContato;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.ICompromisso;
+import br.com.financas.negocio.imp.ICompromisso;
 import br.com.financas.util.Data;
 
 public class PCompromisso extends Persistencia implements ICompromisso {

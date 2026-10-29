@@ -3,6 +3,7 @@ package br.com.financas.negocio;
 import java.util.ArrayList;
 
 import br.com.financas.entidade.ECompromisso;
+import br.com.financas.negocio.imp.ICompromisso;
 import br.com.financas.persistencia.PCompromisso;
 
 public class NCompromisso extends Negocio implements ICompromisso {

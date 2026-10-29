@@ -99,7 +99,8 @@ public class ControleFiltro implements Filter {
 				//rd.forward(request, response);
 			} 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+			// e.printStackTrace();
 			this.tratamentoErro(e);
 			request.getSession(true).setAttribute("eErro", eErro);
 			response.sendRedirect("/financas/jsp/ErrorPage.jsp");

@@ -7,7 +7,7 @@ import java.util.List;
 import br.com.financas.entidade.EAcesso;
 import br.com.financas.entidade.EUsuario;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.IAcesso;
+import br.com.financas.negocio.imp.IAcesso;
 
 public class PAcesso extends Persistencia implements IAcesso {
 	

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import br.com.financas.entidade.ECategoria;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.ICategoria;
+import br.com.financas.negocio.imp.ICategoria;
 
 public class PCategoria extends Persistencia implements ICategoria {
 	

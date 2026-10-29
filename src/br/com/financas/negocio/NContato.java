@@ -3,6 +3,7 @@ package br.com.financas.negocio;
 import java.util.ArrayList;
 
 import br.com.financas.entidade.EContato;
+import br.com.financas.negocio.imp.IContato;
 import br.com.financas.persistencia.PContato;
 
 public class NContato extends Negocio implements IContato {

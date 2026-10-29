@@ -3,6 +3,7 @@ package br.com.financas.negocio;
 import java.util.ArrayList;
 
 import br.com.financas.entidade.EMovimento;
+import br.com.financas.negocio.imp.IMovimento;
 import br.com.financas.persistencia.PMovimento;
 
 public class NMovimento extends Negocio implements IMovimento {

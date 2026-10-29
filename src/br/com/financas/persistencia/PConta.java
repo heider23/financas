@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import br.com.financas.entidade.EConta;
 import br.com.financas.entidade.EUsuario;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.IConta;
+import br.com.financas.negocio.imp.IConta;
 import br.com.financas.util.Data;
 
 public class PConta extends Persistencia implements IConta {

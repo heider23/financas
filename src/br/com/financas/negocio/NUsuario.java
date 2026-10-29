@@ -3,6 +3,7 @@ package br.com.financas.negocio;
 import java.util.List;
 
 import br.com.financas.entidade.EUsuario;
+import br.com.financas.negocio.imp.IUsuario;
 import br.com.financas.persistencia.PUsuario;
 
 public class NUsuario extends Negocio implements IUsuario {	

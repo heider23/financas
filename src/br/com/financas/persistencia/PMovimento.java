@@ -9,7 +9,7 @@ import br.com.financas.entidade.EConta;
 import br.com.financas.entidade.EMovimento;
 import br.com.financas.entidade.EUsuario;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.IMovimento;
+import br.com.financas.negocio.imp.IMovimento;
 import br.com.financas.util.Data;
 
 public class PMovimento extends Persistencia implements IMovimento {

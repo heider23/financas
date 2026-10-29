@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import br.com.financas.entidade.EContato;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.IContato;
+import br.com.financas.negocio.imp.IContato;
 import br.com.financas.util.Data;
 
 public class PContato extends Persistencia implements IContato {

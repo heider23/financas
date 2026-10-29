@@ -2,9 +2,7 @@ package br.com.financas.io;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -15,9 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Properties;
-
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 
 
 public class Banco {
@@ -43,8 +38,7 @@ public class Banco {
 
 	private Properties loadProperties() {
 		Properties properties = new Properties();
-		try {
-						
+		try {						
 			InputStream inputStream = new FileInputStream(this.getPasta()+"database.properties");
 			properties.load(inputStream);
 		} catch (Exception e) {
@@ -57,7 +51,7 @@ public class Banco {
 		URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
 		File file = new File(url.toURI());
 		String pasta  = file.getAbsolutePath();
-		pasta = pasta.substring(0, pasta.length()-8)+"\\";
+		pasta = pasta.substring(0, pasta.length()-8)+"/";
 		return pasta;
 	}
 

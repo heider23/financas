@@ -9,7 +9,7 @@ import java.util.List;
 
 import br.com.financas.entidade.EUsuario;
 import br.com.financas.io.Banco;
-import br.com.financas.negocio.IUsuario;
+import br.com.financas.negocio.imp.IUsuario;
 
 /**
  * @author Administrador
@@ -41,7 +41,7 @@ public class PUsuario extends Persistencia implements IUsuario {
 				}
 				if (objResultSet != null && objResultSet.next()) {
 					eUsuario = new EUsuario();
-					eUsuario.setId(new Integer(objResultSet.getInt("id_usuario")));
+					eUsuario.setId(Integer.valueOf(objResultSet.getInt("id_usuario")));
 					eUsuario.setNome(objResultSet.getString("nome"));
 					eUsuario.setApelido(objResultSet.getString("apelido"));
 					eUsuario.setSenha(objResultSet.getString("senha"));
@@ -66,7 +66,7 @@ public class PUsuario extends Persistencia implements IUsuario {
 				}
 				if (objResultSet != null && objResultSet.next()) {
 					eUsuario = new EUsuario();
-					eUsuario.setId(new Integer(objResultSet.getInt("id_usuario")));
+					eUsuario.setId(Integer.valueOf(objResultSet.getInt("id_usuario")));
 					eUsuario.setNome(objResultSet.getString("nome"));
 					eUsuario.setApelido(objResultSet.getString("apelido"));
 					eUsuario.setSenha(objResultSet.getString("senha"));

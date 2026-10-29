@@ -3,6 +3,7 @@ package br.com.financas.negocio;
 import java.util.ArrayList;
 
 import br.com.financas.entidade.ECategoria;
+import br.com.financas.negocio.imp.ICategoria;
 import br.com.financas.persistencia.PCategoria;
 
 public class NCategoria extends Negocio implements ICategoria {

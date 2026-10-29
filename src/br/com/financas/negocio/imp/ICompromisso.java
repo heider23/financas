@@ -1,4 +1,4 @@
-package br.com.financas.negocio;
+package br.com.financas.negocio.imp;
 
 import java.util.ArrayList;
 
